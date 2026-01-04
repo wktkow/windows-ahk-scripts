@@ -91,3 +91,19 @@ Run in PowerShell:
 powercfg -change -monitor-timeout-ac 0
 powercfg -change -monitor-timeout-dc 0
 ```
+
+
+## 7) Disable Windows Update Service
+Run in PowerShell:
+
+```powershell
+Stop-Service wuauserv -Force; Set-Service wuauserv -StartupType Disabled
+```
+
+## 8) Disable Core Windows Defender Protections
+
+Run in PowerShell:
+
+```powershell
+Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring $true -DisableBlockAtFirstSeen $true -DisableIOAVProtection $true -DisableScriptScanning $true
+```
