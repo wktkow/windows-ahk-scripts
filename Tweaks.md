@@ -107,3 +107,19 @@ Run in PowerShell:
 ```powershell
 Set-MpPreference -DisableRealtimeMonitoring $true -DisableBehaviorMonitoring $true -DisableBlockAtFirstSeen $true -DisableIOAVProtection $true -DisableScriptScanning $true
 ```
+
+## 9) Disable Windows Defender Antivirus (Permanently)
+
+Run in PowerShell:
+
+```powershell
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows Defender" -Name "DisableAntiSpyware" -Type DWord -Value 1
+```
+
+## 10) Disable SmartScreen
+
+Run in PowerShell:
+
+```powershell
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Type String -Value "Off"
+```
