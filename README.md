@@ -1,4 +1,4 @@
-# windows AHk rebind script
+# windows AHK rebind script
 
 #### Purpouse of this is to offer a non retarded keyboard binds experience on windows that does not make me want to blow my head clean off.
 
