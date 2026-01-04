@@ -123,3 +123,45 @@ Run in PowerShell:
 ```powershell
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "SmartScreenEnabled" -Type String -Value "Off"
 ```
+
+## 11) Hide Recycle Bin from desktop and pin to file manager
+
+Run in PowerShell:
+
+```powershell
+# Hide Recycle Bin from Desktop, but keep it visible in File Explorer (navigation pane)
+# Works by:
+#  - setting HideDesktopIcons values to 1 (hidden)
+#  - setting System.IsPinnedToNameSpaceTree to 1 (pinned in Explorer)
+
+$RecycleBinGuid = "{645FF040-5081-101B-9F08-00AA002F954E}"
+
+# 1) Hide from Desktop (per-user)
+$desktopHidePaths = @(
+  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\NewStartPanel",
+  "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcons\ClassicStartMenu"
+)
+
+foreach ($p in $desktopHidePaths) {
+  if (-not (Test-Path $p)) { New-Item -Path $p -Force | Out-Null }
+  New-ItemProperty -Path $p -Name $RecycleBinGuid -PropertyType DWord -Value 1 -Force | Out-Null
+}
+
+# 2) Pin into File Explorer navigation pane (per-user override)
+$pinPaths = @(
+  "HKCU:\Software\Classes\CLSID\$RecycleBinGuid",
+  "HKCU:\Software\Classes\Wow6432Node\CLSID\$RecycleBinGuid"
+)
+
+foreach ($p in $pinPaths) {
+  if (-not (Test-Path $p)) { New-Item -Path $p -Force | Out-Null }
+  New-ItemProperty -Path $p -Name "System.IsPinnedToNameSpaceTree" -PropertyType DWord -Value 1 -Force | Out-Null
+}
+
+# 3) Restart Explorer to apply
+Stop-Process -Name explorer -Force
+Start-Process explorer.exe
+
+# Optional: open Recycle Bin immediately to verify
+Start-Process "shell:RecycleBinFolder"
+```
