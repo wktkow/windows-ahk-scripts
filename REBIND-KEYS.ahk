@@ -20,6 +20,9 @@ if !A_IsAdmin
     ExitApp
 }
 
+; --- Periodically hide Windows Terminal "ghost" window (DesktopWindowXamlSource) ---
+SetTimer(HideGhost, 300)
+
 ; --- Win+Q => Alt+F4 (close window) ---
 #q::Send "!{F4}"
 
@@ -122,4 +125,11 @@ RunAndActivateNewWindow(runTarget, winCriteria, timeoutMs := 2000)
     }
 
     return 0
+}
+
+HideGhost()
+{
+    hwnd := WinExist("DesktopWindowXamlSource ahk_exe WindowsTerminal.exe")
+    if hwnd
+        WinHide("ahk_id " hwnd)
 }
