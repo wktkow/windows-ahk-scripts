@@ -5,7 +5,8 @@ Some quick Windows tweaks/commands.
 Notes:
 - Many of these require an elevated terminal (Run as Administrator).
 - Registry changes can reduce security and/or cause instability. - Obviously.
-- If you don't know what the fuck you are reading then maybe don't use it or at least ask chatgpt idfk.
+- If you don't know what the fuck you are reading then maybe don't use it or at least [ask chatgpt idfk](https://chatgpt.com/?q=Please+explain+to+me+what+code%2Fconfigs+in+repository+https%3A%2F%2Fgithub.com%2Fwktkow%2Fwindows-ahk-scripts%2F+do%2C+Read+all+.md+files+and+return+to+me+a+detailed+however+to+the+point+report.+I+don%27t+have+a+clue+about+how+computers+work.
+).
 
 ## 1) Disable speculation mitigations (registry)
 
