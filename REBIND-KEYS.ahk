@@ -16,10 +16,16 @@
 }
 
 ; --- Win+F => open File Explorer ---
-#f::Run "explorer.exe"
+#f::
+{
+    RunAndActivateNewWindow("explorer.exe", "ahk_class CabinetWClass")
+}
 
 ; --- Win+B => open Google Chrome ---
-#b::Run "chrome.exe"    ; if needed, replace with full path to chrome.exe
+#b::
+{
+    RunAndActivateNewWindow("chrome.exe", "ahk_exe chrome.exe") ; if needed, replace with full path to chrome.exe
+}
 
 ; --- Win+Ctrl+Right => snap window to right (Win+Right) ---
 ^#Right::Send "#{Right}"
@@ -45,3 +51,39 @@
 ; --- Swap CapsLock and Esc ---
 $CapsLock::Esc
 $Esc::CapsLock
+
+RunAndActivateNewWindow(runTarget, winCriteria, timeoutMs := 2000)
+{
+    before := WinGetList(winCriteria)
+    beforeSeen := Map()
+    for hwnd in before
+        beforeSeen[hwnd] := true
+
+    Run runTarget
+
+    deadline := A_TickCount + timeoutMs
+    lastList := before
+    while (A_TickCount < deadline)
+    {
+        lastList := WinGetList(winCriteria)
+        for hwnd in lastList
+        {
+            if !beforeSeen.Has(hwnd)
+            {
+                WinActivate "ahk_id " hwnd
+                WinWaitActive("ahk_id " hwnd, , 1)
+                return hwnd
+            }
+        }
+        Sleep 50
+    }
+
+    if (lastList.Length)
+    {
+        WinActivate "ahk_id " lastList[1]
+        WinWaitActive("ahk_id " lastList[1], , 1)
+        return lastList[1]
+    }
+
+    return 0
+}
