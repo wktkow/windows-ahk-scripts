@@ -4,7 +4,8 @@ Some quick Windows tweaks/commands.
 
 Notes:
 - Many of these require an elevated terminal (Run as Administrator).
-- Registry changes can reduce security and/or cause instability.
+- Registry changes can reduce security and/or cause instability. - Obviously.
+- If you don't know what the fuck you are reading then maybe don't use it or at least ask chatgpt idfk.
 
 ## 1) Disable speculation mitigations (registry)
 
