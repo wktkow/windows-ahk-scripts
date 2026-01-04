@@ -71,6 +71,19 @@ if !A_IsAdmin
 ; --- PrintScreen => Screenshot utility (Win+Shift+S) ---
 PrintScreen::Send "#+s"
 
+; --- Clipboard history: Win+V => Left Alt+V ---
+#InputLevel 0
+#v::Return
+
+#InputLevel 1
+<!v::
+{
+    SendLevel 1
+    Send "#v"
+}
+
+#InputLevel 0
+
 ; --- Swap CapsLock and Esc ---
 $CapsLock::Esc
 $Esc::CapsLock
