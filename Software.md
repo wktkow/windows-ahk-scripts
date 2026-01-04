@@ -36,6 +36,7 @@ code --install-extension ms-vscode-remote.remote-wsl
 
 ## 5) Fix Windows Terminal WSL "empty window" bug
 
+#### Note: this shit doesn't work actually so like idk i implemented a automatic check in the main .ahk file. :///
 Edits Windows Terminal settings to set `compatibility.allowHeadless = false`.
 
 Run in ```PowerShell```:
