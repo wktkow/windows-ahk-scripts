@@ -1,5 +1,25 @@
 ﻿#Requires AutoHotkey v2.0
 
+#SingleInstance Force
+
+; Hotkeys won't work while an elevated (Admin) window is focused unless this script
+; is also running elevated (Windows UIPI / integrity levels).
+if !A_IsAdmin
+{
+    try
+    {
+        if A_IsCompiled
+            Run '*RunAs "' A_ScriptFullPath '"'
+        else
+            Run '*RunAs "' A_AhkPath '" "' A_ScriptFullPath '"'
+    }
+    catch
+    {
+        MsgBox "Run this script as Administrator if you want hotkeys to work inside Admin windows."
+    }
+    ExitApp
+}
+
 ; --- Win+Q => Alt+F4 (close window) ---
 #q::Send "!{F4}"
 
