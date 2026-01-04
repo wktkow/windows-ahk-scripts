@@ -68,6 +68,9 @@ if !A_IsAdmin
 ; --- Win+T => open Windows Terminal (tabbed wt.exe) ---
 #t::Run "wt.exe"        ; if this fails, point it to the full path of wt.exe
 
+; --- PrintScreen => Screenshot utility (Win+Shift+S) ---
+PrintScreen::Send "#+s"
+
 ; --- Swap CapsLock and Esc ---
 $CapsLock::Esc
 $Esc::CapsLock
