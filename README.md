@@ -31,3 +31,7 @@ To enable this script on startup place it or a shortcut to it in:
 ## Other Windows 10 tweaks
 
 I also use other Windows Tweaks to make it less retarded which are outlined in [Tweaks.md](Tweaks.md).
+
+## Software
+
+Package managment, libs and so on. [Software.md](Software.md)
